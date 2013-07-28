@@ -5,6 +5,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using P.V.WantHelp_.Utils;
 using System.IO;
 using P.V.WantHelp_.Models;
 
@@ -19,11 +20,16 @@ namespace P.V.WantHelp_.Controllers
 
         public ActionResult Index()
         {
-            /*  foto Avatar  */
-            int aux = Convert.ToInt32(Session["idUsuario"]);
-            string Cadenausuario = db.Usuario.Where(a => a.Id_Usu == aux).FirstOrDefault().Avatar;
-            ViewBag.fotoA = Cadenausuario;
-            /*******************/
+            if (Request.IsAuthenticated)
+            {
+                /*  foto Avatar  */
+                int aux = Convert.ToInt32(Session["idUsuario"]);
+                string Cadenausuario = db.Usuario.Where(a => a.Id_Usu == aux).FirstOrDefault().Avatar;
+                ViewBag.fotoA = Cadenausuario;
+                /*******************/
+                Permisos check = new Permisos(Convert.ToInt32(Session["idus"]));
+                ViewBag.Menus = check.getPermisos();
+            };
             return View(db.Cursos.ToList());
         }
 
@@ -32,11 +38,16 @@ namespace P.V.WantHelp_.Controllers
 
         public ActionResult Details(int id = 0)
         {
-            /*  foto Avatar  */
-            int aux = Convert.ToInt32(Session["idUsuario"]);
-            string Cadenausuario = db.Usuario.Where(a => a.Id_Usu == aux).FirstOrDefault().Avatar;
-            ViewBag.fotoA = Cadenausuario;
-            /*******************/
+            if (Request.IsAuthenticated)
+            {
+                /*  foto Avatar  */
+                int aux = Convert.ToInt32(Session["idUsuario"]);
+                string Cadenausuario = db.Usuario.Where(a => a.Id_Usu == aux).FirstOrDefault().Avatar;
+                ViewBag.fotoA = Cadenausuario;
+                /*******************/
+                Permisos check = new Permisos(Convert.ToInt32(Session["idus"]));
+                ViewBag.Menus = check.getPermisos();
+            };
             Cursos cursos = db.Cursos.Find(id);
             if (cursos == null)
             {
@@ -50,11 +61,16 @@ namespace P.V.WantHelp_.Controllers
 
         public ActionResult Create()
         {
-            /*  foto Avatar  */
-            int aux = Convert.ToInt32(Session["idUsuario"]);
-            string Cadenausuario = db.Usuario.Where(a => a.Id_Usu == aux).FirstOrDefault().Avatar;
-            ViewBag.fotoA = Cadenausuario;
-            /*******************/
+            if (Request.IsAuthenticated)
+            {
+                /*  foto Avatar  */
+                int aux = Convert.ToInt32(Session["idUsuario"]);
+                string Cadenausuario = db.Usuario.Where(a => a.Id_Usu == aux).FirstOrDefault().Avatar;
+                ViewBag.fotoA = Cadenausuario;
+                /*******************/
+                Permisos check = new Permisos(Convert.ToInt32(Session["idus"]));
+                ViewBag.Menus = check.getPermisos();
+            };
             return View();
         }
 
@@ -64,11 +80,16 @@ namespace P.V.WantHelp_.Controllers
         [HttpPost]
         public ActionResult Create(Cursos cursos, HttpPostedFileBase imagenportada)
         {
-            /*  foto Avatar  */
-            int aux = Convert.ToInt32(Session["idUsuario"]);
-            string Cadenausuario = db.Usuario.Where(a => a.Id_Usu == aux).FirstOrDefault().Avatar;
-            ViewBag.fotoA = Cadenausuario;
-            /*******************/
+            if (Request.IsAuthenticated)
+            {
+                /*  foto Avatar  */
+                int aux = Convert.ToInt32(Session["idUsuario"]);
+                string Cadenausuario = db.Usuario.Where(a => a.Id_Usu == aux).FirstOrDefault().Avatar;
+                ViewBag.fotoA = Cadenausuario;
+                /*******************/
+                Permisos check = new Permisos(Convert.ToInt32(Session["idus"]));
+                ViewBag.Menus = check.getPermisos();
+            };
             if (ModelState.IsValid)
             {
                 db.Entry(cursos).State = EntityState.Modified;
@@ -120,11 +141,16 @@ namespace P.V.WantHelp_.Controllers
 
         public ActionResult Edit(int id = 0)
         {
-            /*  foto Avatar  */
-            int aux = Convert.ToInt32(Session["idUsuario"]);
-            string Cadenausuario = db.Usuario.Where(a => a.Id_Usu == aux).FirstOrDefault().Avatar;
-            ViewBag.fotoA = Cadenausuario;
-            /*******************/
+            if (Request.IsAuthenticated)
+            {
+                /*  foto Avatar  */
+                int aux = Convert.ToInt32(Session["idUsuario"]);
+                string Cadenausuario = db.Usuario.Where(a => a.Id_Usu == aux).FirstOrDefault().Avatar;
+                ViewBag.fotoA = Cadenausuario;
+                /*******************/
+                Permisos check = new Permisos(Convert.ToInt32(Session["idus"]));
+                ViewBag.Menus = check.getPermisos();
+            };
             Cursos cursos = db.Cursos.Find(id);
             if (cursos == null)
             {
@@ -139,11 +165,16 @@ namespace P.V.WantHelp_.Controllers
         [HttpPost]
         public ActionResult Edit(Cursos cursos)
         {
-            /*  foto Avatar  */
-            int aux = Convert.ToInt32(Session["idUsuario"]);
-            string Cadenausuario = db.Usuario.Where(a => a.Id_Usu == aux).FirstOrDefault().Avatar;
-            ViewBag.fotoA = Cadenausuario;
-            /*******************/
+            if (Request.IsAuthenticated)
+            {
+                /*  foto Avatar  */
+                int aux = Convert.ToInt32(Session["idUsuario"]);
+                string Cadenausuario = db.Usuario.Where(a => a.Id_Usu == aux).FirstOrDefault().Avatar;
+                ViewBag.fotoA = Cadenausuario;
+                /*******************/
+                Permisos check = new Permisos(Convert.ToInt32(Session["idus"]));
+                ViewBag.Menus = check.getPermisos();
+            };
             if (ModelState.IsValid)
             {
                 db.Entry(cursos).State = EntityState.Modified;
@@ -158,11 +189,16 @@ namespace P.V.WantHelp_.Controllers
 
         public ActionResult Delete(int id = 0)
         {
-            /*  foto Avatar  */
-            int aux = Convert.ToInt32(Session["idUsuario"]);
-            string Cadenausuario = db.Usuario.Where(a => a.Id_Usu == aux).FirstOrDefault().Avatar;
-            ViewBag.fotoA = Cadenausuario;
-            /*******************/
+            if (Request.IsAuthenticated)
+            {
+                /*  foto Avatar  */
+                int aux = Convert.ToInt32(Session["idUsuario"]);
+                string Cadenausuario = db.Usuario.Where(a => a.Id_Usu == aux).FirstOrDefault().Avatar;
+                ViewBag.fotoA = Cadenausuario;
+                /*******************/
+                Permisos check = new Permisos(Convert.ToInt32(Session["idus"]));
+                ViewBag.Menus = check.getPermisos();
+            };
             Cursos cursos = db.Cursos.Find(id);
             if (cursos == null)
             {
@@ -177,11 +213,16 @@ namespace P.V.WantHelp_.Controllers
         [HttpPost, ActionName("Delete")]
         public ActionResult DeleteConfirmed(int id)
         {
-            /*  foto Avatar  */
-            int aux = Convert.ToInt32(Session["idUsuario"]);
-            string Cadenausuario = db.Usuario.Where(a => a.Id_Usu == aux).FirstOrDefault().Avatar;
-            ViewBag.fotoA = Cadenausuario;
-            /*******************/
+            if (Request.IsAuthenticated)
+            {
+                /*  foto Avatar  */
+                int aux = Convert.ToInt32(Session["idUsuario"]);
+                string Cadenausuario = db.Usuario.Where(a => a.Id_Usu == aux).FirstOrDefault().Avatar;
+                ViewBag.fotoA = Cadenausuario;
+                /*******************/
+                Permisos check = new Permisos(Convert.ToInt32(Session["idus"]));
+                ViewBag.Menus = check.getPermisos();
+            };
             Cursos cursos = db.Cursos.Find(id);
             db.Cursos.Remove(cursos);
             db.SaveChanges();

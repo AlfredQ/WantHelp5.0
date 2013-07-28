@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using WebMatrix.WebData;
+using P.V.WantHelp_.Utils;
 using System.IO;
 using System.IO.Compression;
 using P.V.WantHelp_.Models;
@@ -21,22 +22,46 @@ namespace P.V.WantHelp_.Controllers
         
         public ActionResult Index()
         {
-            /*  foto Avatar  */
-            int aux = Convert.ToInt32(Session["idUsuario"]);
-            string Cadenausuario = db.Usuario.Where(a => a.Id_Usu == aux).FirstOrDefault().Avatar;
-            ViewBag.fotoA = Cadenausuario;
-            /*******************/
-            //Cursos cursofoto = db.Cursos();
-            //ViewBag.fotoportada = cursofoto.FotoPortada;
+           
+            if (Request.IsAuthenticated)
+            {
+                /*  foto Avatar  */
+                int aux = Convert.ToInt32(Session["idUsuario"]);
+                string Cadenausuario = db.Usuario.Where(a => a.Id_Usu == aux).FirstOrDefault().Avatar;
+                ViewBag.fotoA = Cadenausuario;
+                /*******************/
+                Permisos check = new Permisos(Convert.ToInt32(Session["idus"]));
+                ViewBag.Menus = check.getPermisos();
+            };
             return View(db.Cursos.OrderByDescending(a => a.Id_Curso).ToList()); ;
         }
         public ActionResult ClasesCurso(int id)
         {
+            if (Request.IsAuthenticated)
+            {
+                /*  foto Avatar  */
+                int aux = Convert.ToInt32(Session["idUsuario"]);
+                string Cadenausuario = db.Usuario.Where(a => a.Id_Usu == aux).FirstOrDefault().Avatar;
+                ViewBag.fotoA = Cadenausuario;
+                /*******************/
+                Permisos check = new Permisos(Convert.ToInt32(Session["idus"]));
+                ViewBag.Menus = check.getPermisos();
+            };
             CursosActions contextoC = new CursosActions();
             return View(contextoC.getSesiones(id));
         }
         public ActionResult IngresarAlCurso(int id)
         {
+            if (Request.IsAuthenticated)
+            {
+                /*  foto Avatar  */
+                int aux = Convert.ToInt32(Session["idUsuario"]);
+                string Cadenausuario = db.Usuario.Where(a => a.Id_Usu == aux).FirstOrDefault().Avatar;
+                ViewBag.fotoA = Cadenausuario;
+                /*******************/
+                Permisos check = new Permisos(Convert.ToInt32(Session["idus"]));
+                ViewBag.Menus = check.getPermisos();
+            };
             ViewBag.idUs = Session["idUsuario"];
             ViewBag.idSesion = id;
             string NameS = db.sesiones.Where(a => a.id == id).FirstOrDefault().titulo;
@@ -45,6 +70,16 @@ namespace P.V.WantHelp_.Controllers
         }
         public ActionResult IngresaAlMaterial()
         {
+            if (Request.IsAuthenticated)
+            {
+                /*  foto Avatar  */
+                int aux = Convert.ToInt32(Session["idUsuario"]);
+                string Cadenausuario = db.Usuario.Where(a => a.Id_Usu == aux).FirstOrDefault().Avatar;
+                ViewBag.fotoA = Cadenausuario;
+                /*******************/
+                Permisos check = new Permisos(Convert.ToInt32(Session["idus"]));
+                ViewBag.Menus = check.getPermisos();
+            };
             ViewBag.idUs = Session["idUsuario"];
             //ViewBag.idCursMat = id;
 
@@ -52,6 +87,16 @@ namespace P.V.WantHelp_.Controllers
         }
         public JsonResult Descargartodo(int id)
         {
+            if (Request.IsAuthenticated)
+            {
+                /*  foto Avatar  */
+                int aux = Convert.ToInt32(Session["idUsuario"]);
+                string Cadenausuario = db.Usuario.Where(a => a.Id_Usu == aux).FirstOrDefault().Avatar;
+                ViewBag.fotoA = Cadenausuario;
+                /*******************/
+                Permisos check = new Permisos(Convert.ToInt32(Session["idus"]));
+                ViewBag.Menus = check.getPermisos();
+            };
             AdminActions contexto = new AdminActions();
             Cursos cursoM = contexto.getCursos(id);
             List<Material> lista = contexto.getFiless(id);
@@ -69,6 +114,16 @@ namespace P.V.WantHelp_.Controllers
         }
         public ViewResult MostrarCursosArchivos() 
         {
+            if (Request.IsAuthenticated)
+            {
+                /*  foto Avatar  */
+                int aux = Convert.ToInt32(Session["idUsuario"]);
+                string Cadenausuario = db.Usuario.Where(a => a.Id_Usu == aux).FirstOrDefault().Avatar;
+                ViewBag.fotoA = Cadenausuario;
+                /*******************/
+                Permisos check = new Permisos(Convert.ToInt32(Session["idus"]));
+                ViewBag.Menus = check.getPermisos();
+            };
             AdminActions contexto = new AdminActions();
             List<Material> material = contexto.getFileMaterial();
             return View(material);
