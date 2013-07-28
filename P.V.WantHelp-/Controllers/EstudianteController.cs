@@ -37,10 +37,8 @@ namespace P.V.WantHelp_.Controllers
         }
         public ActionResult ClasesCurso(int id)
         {
-<<<<<<< HEAD
             ViewBag.idUs = Session["idUsuario"];
             ViewBag.idSesion = id;
-=======
             if (Request.IsAuthenticated)
             {
                 /*  foto Avatar  */
@@ -51,7 +49,6 @@ namespace P.V.WantHelp_.Controllers
                 Permisos check = new Permisos(Convert.ToInt32(Session["idus"]));
                 ViewBag.Menus = check.getPermisos();
             };
->>>>>>> c558e91eff4a2d91e9cbd790fab403e66f47e9ee
             CursosActions contextoC = new CursosActions();
             return View(contextoC.getSesiones(id));
         }
