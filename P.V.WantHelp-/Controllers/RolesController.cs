@@ -20,13 +20,13 @@ namespace P.V.WantHelp_.Controllers
 
         public ActionResult Index()
         {
-            
-            
             if (Request.IsAuthenticated)
             {
-               /* int aux = Convert.ToInt32(Session["idUsuario"]);
+                /*  foto Avatar  */
+                int aux = Convert.ToInt32(Session["idUsuario"]);
                 string Cadenausuario = db.Usuario.Where(a => a.Id_Usu == aux).FirstOrDefault().Avatar;
-                ViewBag.fotoA = Cadenausuario;*/
+                ViewBag.fotoA = Cadenausuario;
+                /*******************/
                 Permisos check = new Permisos(Convert.ToInt32(Session["idus"]));
                 ViewBag.Menus = check.getPermisos();
             };
@@ -38,11 +38,16 @@ namespace P.V.WantHelp_.Controllers
 
         public ActionResult Details(int id = 0)
         {
-            /*  foto Avatar  */
-            int aux = Convert.ToInt32(Session["idUsuario"]);
-            string Cadenausuario = db.Usuario.Where(a => a.Id_Usu == aux).FirstOrDefault().Avatar;
-            ViewBag.fotoA = Cadenausuario;
-            /*******************/
+            if (Request.IsAuthenticated)
+            {
+                /*  foto Avatar  */
+                int aux = Convert.ToInt32(Session["idUsuario"]);
+                string Cadenausuario = db.Usuario.Where(a => a.Id_Usu == aux).FirstOrDefault().Avatar;
+                ViewBag.fotoA = Cadenausuario;
+                /*******************/
+                Permisos check = new Permisos(Convert.ToInt32(Session["idus"]));
+                ViewBag.Menus = check.getPermisos();
+            };
             webpages_Roles webpages_roles = db.webpages_Roles.Find(id);
             if (webpages_roles == null)
             {
@@ -56,11 +61,16 @@ namespace P.V.WantHelp_.Controllers
 
         public ActionResult Create()
         {
-            /*  foto Avatar  */
-            int aux = Convert.ToInt32(Session["idUsuario"]);
-            string Cadenausuario = db.Usuario.Where(a => a.Id_Usu == aux).FirstOrDefault().Avatar;
-            ViewBag.fotoA = Cadenausuario;
-            /*******************/
+            if (Request.IsAuthenticated)
+            {
+                /*  foto Avatar  */
+                int aux = Convert.ToInt32(Session["idUsuario"]);
+                string Cadenausuario = db.Usuario.Where(a => a.Id_Usu == aux).FirstOrDefault().Avatar;
+                ViewBag.fotoA = Cadenausuario;
+                /*******************/
+                Permisos check = new Permisos(Convert.ToInt32(Session["idus"]));
+                ViewBag.Menus = check.getPermisos();
+            };
             return View();
         }
 
@@ -70,6 +80,16 @@ namespace P.V.WantHelp_.Controllers
         [HttpPost]
         public ActionResult Create(webpages_Roles webpages_roles)
         {
+            if (Request.IsAuthenticated)
+            {
+                /*  foto Avatar  */
+                int aux = Convert.ToInt32(Session["idUsuario"]);
+                string Cadenausuario = db.Usuario.Where(a => a.Id_Usu == aux).FirstOrDefault().Avatar;
+                ViewBag.fotoA = Cadenausuario;
+                /*******************/
+                Permisos check = new Permisos(Convert.ToInt32(Session["idus"]));
+                ViewBag.Menus = check.getPermisos();
+            };
             try
             {
                 if (ModelState.IsValid)
@@ -97,6 +117,16 @@ namespace P.V.WantHelp_.Controllers
 
         public ActionResult Edit(int id = 0)
         {
+            if (Request.IsAuthenticated)
+            {
+                /*  foto Avatar  */
+                int aux = Convert.ToInt32(Session["idUsuario"]);
+                string Cadenausuario = db.Usuario.Where(a => a.Id_Usu == aux).FirstOrDefault().Avatar;
+                ViewBag.fotoA = Cadenausuario;
+                /*******************/
+                Permisos check = new Permisos(Convert.ToInt32(Session["idus"]));
+                ViewBag.Menus = check.getPermisos();
+            };
             webpages_Roles webpages_roles = db.webpages_Roles.Find(id);
             if (webpages_roles == null)
             {
@@ -111,6 +141,16 @@ namespace P.V.WantHelp_.Controllers
         [HttpPost]
         public ActionResult Edit(webpages_Roles webpages_roles)
         {
+            if (Request.IsAuthenticated)
+            {
+                /*  foto Avatar  */
+                int aux = Convert.ToInt32(Session["idUsuario"]);
+                string Cadenausuario = db.Usuario.Where(a => a.Id_Usu == aux).FirstOrDefault().Avatar;
+                ViewBag.fotoA = Cadenausuario;
+                /*******************/
+                Permisos check = new Permisos(Convert.ToInt32(Session["idus"]));
+                ViewBag.Menus = check.getPermisos();
+            };
             if (ModelState.IsValid)
             {
                 db.Entry(webpages_roles).State = EntityState.Modified;
@@ -125,6 +165,16 @@ namespace P.V.WantHelp_.Controllers
 
         public ActionResult Delete(int id = 0)
         {
+            if (Request.IsAuthenticated)
+            {
+                /*  foto Avatar  */
+                int aux = Convert.ToInt32(Session["idUsuario"]);
+                string Cadenausuario = db.Usuario.Where(a => a.Id_Usu == aux).FirstOrDefault().Avatar;
+                ViewBag.fotoA = Cadenausuario;
+                /*******************/
+                Permisos check = new Permisos(Convert.ToInt32(Session["idus"]));
+                ViewBag.Menus = check.getPermisos();
+            };
             webpages_Roles webpages_roles = db.webpages_Roles.Find(id);
             if (webpages_roles == null)
             {
@@ -139,6 +189,16 @@ namespace P.V.WantHelp_.Controllers
         [HttpPost, ActionName("Delete")]
         public ActionResult DeleteConfirmed(int id)
         {
+            if (Request.IsAuthenticated)
+            {
+                /*  foto Avatar  */
+                int aux = Convert.ToInt32(Session["idUsuario"]);
+                string Cadenausuario = db.Usuario.Where(a => a.Id_Usu == aux).FirstOrDefault().Avatar;
+                ViewBag.fotoA = Cadenausuario;
+                /*******************/
+                Permisos check = new Permisos(Convert.ToInt32(Session["idus"]));
+                ViewBag.Menus = check.getPermisos();
+            };
             try
             {
                 webpages_Roles webpages_roles = db.webpages_Roles.Find(id);

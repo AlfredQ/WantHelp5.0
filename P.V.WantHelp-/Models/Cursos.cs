@@ -11,7 +11,7 @@ namespace P.V.WantHelp_.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
     public partial class Cursos
     {
         public Cursos()
@@ -22,12 +22,17 @@ namespace P.V.WantHelp_.Models
         }
     
         public int Id_Curso { get; set; }
+        [Required]
         public string Titulo { get; set; }
+        [Required]
         public string Descripcion { get; set; }
+        [Required]
         public System.DateTime Fecha_I { get; set; }
+        [Required]
         public System.DateTime Fecha_F { get; set; }
         public string urlBase { get; set; }
         public string urlHost { get; set; }
+        [Required]
         public string FotoPortada { get; set; }
     
         public virtual ICollection<inscripcion> inscripcion { get; set; }

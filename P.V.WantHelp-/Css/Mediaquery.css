@@ -242,11 +242,12 @@
         padding-right:30px;
     }    
 }
+/* media query cuando los botones del logueo y cursos se ponen arriba*/
 @media only screen and (max-width: 675px) {
     #body_content {
         margin: 0 auto;
         width: 95%;
-        border: 1px solid #ff0000;
+        border: 0px solid #ff0000;
         height: 1493px;
 
     }
@@ -268,6 +269,24 @@
         position:absolute;
         z-index:3;
         display:inline-block;
+    }
+    #sectorcursos {
+        display:none;
+        
+    }
+    #mainlogin {
+        height:15px;
+    }
+    #redessociales {
+        width:70px;
+        margin-top:30px;
+        border:0px solid #ff0000;                
+    }
+    #redessociales, .RedeSociales {
+        margin-left:-110px;
+    }
+    footer {
+        margin-top:160px;
     }
     .menucursoscel {        
         width:50px;

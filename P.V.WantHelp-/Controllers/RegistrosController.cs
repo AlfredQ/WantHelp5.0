@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using P.V.WantHelp_.Utils;
 using P.V.WantHelp_.Models;
 
 namespace P.V.WantHelp_.Controllers
@@ -13,21 +14,31 @@ namespace P.V.WantHelp_.Controllers
         //
         // GET: /Registros/
         public ActionResult RegistroCurso() {
-            /*  foto Avatar  */
-            int aux = Convert.ToInt32(Session["idUsuario"]);
-            string Cadenausuario = db.Usuario.Where(a => a.Id_Usu == aux).FirstOrDefault().Avatar;
-            ViewBag.fotoA = Cadenausuario;
-            /*******************/
+            if (Request.IsAuthenticated)
+            {
+                /*  foto Avatar  */
+                int aux = Convert.ToInt32(Session["idUsuario"]);
+                string Cadenausuario = db.Usuario.Where(a => a.Id_Usu == aux).FirstOrDefault().Avatar;
+                ViewBag.fotoA = Cadenausuario;
+                /*******************/
+                Permisos check = new Permisos(Convert.ToInt32(Session["idus"]));
+                ViewBag.Menus = check.getPermisos();
+            };
             return View();
         }
         [HttpPost]
         public ActionResult RegistroCurso(Cursos rcurso)
         {
-            /*  foto Avatar  */
-            int aux = Convert.ToInt32(Session["idUsuario"]);
-            string Cadenausuario = db.Usuario.Where(a => a.Id_Usu == aux).FirstOrDefault().Avatar;
-            ViewBag.fotoA = Cadenausuario;
-            /*******************/
+            if (Request.IsAuthenticated)
+            {
+                /*  foto Avatar  */
+                int aux = Convert.ToInt32(Session["idUsuario"]);
+                string Cadenausuario = db.Usuario.Where(a => a.Id_Usu == aux).FirstOrDefault().Avatar;
+                ViewBag.fotoA = Cadenausuario;
+                /*******************/
+                Permisos check = new Permisos(Convert.ToInt32(Session["idus"]));
+                ViewBag.Menus = check.getPermisos();
+            };
             if (ModelState.IsValid)
             {
                 PlataformaVirtualEntities conex = new PlataformaVirtualEntities();
@@ -53,11 +64,16 @@ namespace P.V.WantHelp_.Controllers
         }
         public ActionResult Index()
         {
-            /*  foto Avatar  */
-            int aux = Convert.ToInt32(Session["idUsuario"]);
-            string Cadenausuario = db.Usuario.Where(a => a.Id_Usu == aux).FirstOrDefault().Avatar;
-            ViewBag.fotoA = Cadenausuario;
-            /*******************/
+            if (Request.IsAuthenticated)
+            {
+                /*  foto Avatar  */
+                int aux = Convert.ToInt32(Session["idUsuario"]);
+                string Cadenausuario = db.Usuario.Where(a => a.Id_Usu == aux).FirstOrDefault().Avatar;
+                ViewBag.fotoA = Cadenausuario;
+                /*******************/
+                Permisos check = new Permisos(Convert.ToInt32(Session["idus"]));
+                ViewBag.Menus = check.getPermisos();
+            };
             return View();
         }
 
