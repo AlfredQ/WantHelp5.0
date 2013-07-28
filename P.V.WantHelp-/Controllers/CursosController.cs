@@ -252,5 +252,41 @@ namespace P.V.WantHelp_.Controllers
             }
             return Json(new { lista = course });
         }
+        [HttpPost]
+        public JsonResult EnviarBlog(Respuestas_Chat msjrc)
+        {
+            if (Session["idUs"] == null)
+            {
+                return Json(new { data = false });
+            }
+            msjrc.idSe=msjrc.idSe;
+            msjrc.idUs=Convert.ToInt32(Session["idUsuario"]);
+            msjrc.fecha= DateTime.Now;
+            msjrc.idChat = 1;
+            AdminActions contexto = new AdminActions();
+            if (contexto.EnviarMensajeR(msjrc))
+            {
+                return Json(new { data = true });
+            }
+            return Json(new { data = false });
+        }
+        [HttpPost]
+        public JsonResult getMensajesR(Respuestas_Chat msjrc)
+        { 
+            MensajeActions contexto = new MensajeActions();
+            List<Respuestas_Chat> listaMensajeR = contexto.getMensajesR(msjrc.idSe);
+            List<MensajesViewR> listraMostrarR = new List<MensajesViewR>();
+            foreach (var item in listaMensajeR)
+            {
+                MensajesViewR insr= new MensajesViewR(){
+
+                    nickR=item.Usuario.Nombre,
+                    mensajeR= item.mensaje,
+                    fechaR = item.fecha.ToString()
+                };
+                listraMostrarR.Add(insr);
+            }
+            return Json(new { lista = listraMostrarR });
+        }
     }
 }

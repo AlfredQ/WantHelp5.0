@@ -19,4 +19,11 @@ namespace P.V.WantHelp_.Models
         public string mmensaje { set; get; }
         public string fecha { set; get; }
     }
+    public class MensajesViewR
+    {
+        public string nickR { get; set; }
+        public string mensajeR { get; set; }
+        public string fechaR{get;set;}
+        public string puntos { get; set; }
+    }
 }

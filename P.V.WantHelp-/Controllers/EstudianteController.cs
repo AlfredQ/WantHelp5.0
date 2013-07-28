@@ -32,6 +32,8 @@ namespace P.V.WantHelp_.Controllers
         }
         public ActionResult ClasesCurso(int id)
         {
+            ViewBag.idUs = Session["idUsuario"];
+            ViewBag.idSesion = id;
             CursosActions contextoC = new CursosActions();
             return View(contextoC.getSesiones(id));
         }

@@ -4,8 +4,7 @@
     ViewBag.Title = "ClasesCurso";
 }
 <link rel="stylesheet" type="text/css" href="~/Css/Nuevos.css" />
-<script src="~/Scripts/jquery-1.7.1.min.js"></script>
-<script type="text/javascript" src="~/Scripts/editordetexto.js"></script>
+
 <style  type="text/css">
     .contenedor_opcionescursos{
        margin:0 auto;       
@@ -68,8 +67,8 @@
     }
     .mentionsIntup { width:98px;
     }
-    .mentionsTextarea {
-        width:232px;
+    .mensaje {
+        width:262px;
     }
     .borderC{
         border:1px solid #cfdee5;
@@ -80,13 +79,13 @@
         margin:10px;
     }
     .tituloC,.descripcionC {
-        font-family: Gabriola;
-        font-size: 20px;
+        font-family: Georgia;
         color: #808080;
         text-align: center;
         font-weight: bold;
     }
     .tituloC{
+        font-size: 20px;
         -moz-border-radius: 5px;
         -webkit-border-radius: 5px;
         border-radius: 5px;
@@ -101,8 +100,62 @@
     .descripcionC {
         margin:0px 0px 0px 10px;
     }
-    
+   .commentmetadata {
+    margin: 5px 0 0 0;
+    display: block;
+    color: #cc0000;
+    }
+    .coment-author {
+        margin-left:0px;
+    }
+    .cite {
+        font-weight: normal;
+        font-style: normal;
+        font-size: 11px;
+        color: #000;
+        margin-left:0px;
+    }
+    .puntuacionRM {
+        margin:-5px;
+    }
+    .puntuacionR {
+        border:0px solid #000;
+        display:inline-block;
+        margin-left:5px;
+        margin-top:5px;
+    }
 </style>
+<script>
+    $(document).ready(function () {
+        $.post("/Cursos/getMensajesR", { "idSe": $("#idSe").val() },
+            function (data) {
+                console.log(data.lista);
+                var i = data.lista.length - 1;
+                html = "";
+                for (i; i >= 0; i--) {
+                    html += "<div class='borderC'>"
+                    html += "<div class='coment-author'>";
+                    html += "<cite>" + data.lista[i].nickR + "</cite><span class='finmsj'>Dice:</span></div>";
+                    html += "<div class='comment-meta commentmetadata'><a href='/'>" + data.lista[i].fechaR + "</a></div>";
+                    html += "<p class='descripcionC'>" + data.lista[i].mensajeR + "</p></div>";
+                }
+                $(".ContenedorRC").html(html);
+            }, "json");
+        $(this).keydown(function (e) {
+            if (e.keyCode == 13) {
+                if ($(".mensaje").val() != "")
+                {
+                    $.post("/Cursos/EnviarBlog", {
+                        "mensaje": $(".mensaje").val(), "idUs": $("#idUs").val(), "idSe": $("#idSe").val()
+                    },
+                        function (data) {
+                            $(".mensaje").val("");
+                        }, "json");
+                }
+            }
+        });
+    });
+</script>
 <section class="section_cursos">
     <h2>Clases</h2>
     <p style="margin-left:15px;">
@@ -113,7 +166,7 @@
             Saludos Bienvenido a las clases de este curso.. puede ingresar a nuestro chat oh puede descargar los archivos de las clases
             @foreach (var item in Model) {    
                 <div class="borderC">
-                    <img src="~/Image/otto.png" class="curso1img" />
+                    <img src="~/Image/trabajo_grupo.jpg" class="curso1img" />
                     <div>
                         <div class="tituloC">@Html.DisplayFor(modelItem => item.titulo)</div>
                         <div class="classname">
@@ -127,62 +180,63 @@
         <div class="opciones optionRightC">
             CSS Button Generator will create beautiful css buttons for you to use on your web
             <div>
-                <textarea name="add_comment_text_" class="mentionsTextarea uiTextareaNoResize " title="Escribe un comentario..." placeholder="Escribe un comentario...!! ^_^" value="Escribe un comentario..." id="js_17" aria-owns="js_58" aria-haspopup="true" aria-expanded="false" aria-label="Escribe un comentario..."></textarea>
+                <input type="hidden" id="idUs" value="@ViewBag.idUs" />
+                <input type="hidden" id="idSe" value="@ViewBag.idSesion"/>
+                <textarea name="add_comment_text_" maxlength="200" rows="4" cols="6" class="mensaje" title="Escribe un comentario..." placeholder="Escribe un comentario...!! ^_^" aria-owns="js_58" aria-haspopup="true" aria-expanded="false" aria-label="Escribe un comentario..."></textarea>
+            </div>
+            <div class="ContenedorRC">
+                <ul id="MesnajesRC">
+
+                </ul>
+            <div class="borderC">
+                <div class="coment-author">
+                    <img src="~/Avatar/A-usuarioh.png" class="curso1img" />
+                    <cite>Juan Perez</cite>
+                    <span class="finmsj">Dice:</span>
+                </div>
+                <div class="comment-meta commentmetadata"><a href="/">
+                    29/07/2013 a las 02:41 AM</a>
+                </div>
+                <p class="descripcionC">el libro que yo leí se llama LA METAMORFOSIS, el autor es Franz Kafka les invito a que lean este libro en lo personal me encanto, y los invito leanlo de verdad.</p>
+                <div class="puntuacionRM">
+                    <div class="puntuacionR">
+                        <a class="respuesta">2 respuesta</a>
+                    </div>
+                    <div class="puntuacionR">Puntaje &nbsp;
+                        <select>
+                            <option>0</option>
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                        </select>
+                    </div>
+                </div>
             </div>
             <div class="borderC">
-                <img src="~/Avatar/A-usuarioh.png" class="curso1img" />
-                    <div>
-                        <div class="tituloC">Juan Perez</div>
-                        <div class="descripcionC">Por favor sera que me poden explicar que si hizo hoy ene clase</div>
+                <div class="coment-author">
+                    <img src="~/Avatar/A-usuariom.png" class="curso1img" />
+                    <cite>Maria Elena</cite>
+                    <span class="finmsj">Dice:</span>
+                </div>
+                <div class="comment-meta commentmetadata"><a href="/">
+                    30/07/2013 a las 10:41 AM</a>
+                </div>
+                <p class="descripcionC">Hola Juan que tal como estas si el libro es muy bueno y les invito a que lean este libro en lo personal me encanto, y los invito leanlo de verdad.</p>
+                <div class="puntuacionRM">
+                    <div class="puntuacionR">
+                        <a class="respuesta">2 respuesta</a>
                     </div>
-            </div>
-        </div>
-    </div>
-    <div class="contenedor_opcionescursos">
-        <div class="opcionesC optionLeft">
-            @foreach (var item in Model) {    
-                <div class="cursos_11" style="margin-left:50px; width:450px;">                
-                    <img src="~/Image/otto.png" class="curso1img" />
-                    <div class="curso1" style="">
-                        <div style="text-align:center;font-size:33px;">@Html.DisplayFor(modelItem => item.titulo)</div>
-                        <div style="text-align:center;font-size:18px;"><a href="/Estudiante/IngresaAlMaterial/@item.id">Archivos del curso</a> | <a href="/Estudiante/IngresarAlCurso/@item.id">Chat</a></div>
-                        <div style="text-align:center;font-size:20px;">@Html.DisplayFor(modelItem => item.descriocion)</div>
+                    <div class="puntuacionR">Puntaje &nbsp;
+                        <select>
+                            <option>0</option>
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                        </select>
                     </div>
-                </div>        
-            }    
-        </div>
-        <div class="opcionesC optionRight"> 
-            <section>
-			<div>
-                <ul class="menu_pregunta">
-                    <li>Mejores</li>
-                    <li>Nuevas</li>
-                    <li>No Resueltas</li>
-                </ul>
-            </div><!--style="border:0px solid #000;margin-left:25%; width:320px;"-->
-    <div>
-        <textarea name="add_comment_text_" class="mentionsTextarea uiTextareaNoResize " title="Escribe un comentario..." placeholder="Escribe un comentario..." value="Escribe un comentario..." id="js_17" aria-owns="js_58" aria-haspopup="true" aria-expanded="true" aria-label="Escribe un comentario..."></textarea>
-    </div>
-    <div class="preguntadiv" style="border:1px solid #000;">
-        <div class="preguntaD">
-            <p style="text-align:center;">.bbbbbbb</p>
-        </div>
-        <div style="border:1px solid #000;width:70px; max-width:70px; height:70px;max-height:70px;display:inline-block;margin:5px 5px 0px 5px;background-image:url(../Image/international-forex-trading.png)">.</div>
-        <div>
-            <div style="border:0px solid #000;display:inline-block;margin-left:5px;margin-top:5px;display:inline-block;">
-                <a class="respuesta">2 respuesta</a>
+                </div>
             </div>
-            <div style="border:0px solid #000;display:inline-block;margin-left:5px;margin-top:5px;display:inline-block;">Puntaje &nbsp;
-                <select>
-                    <option>0</option>
-                    <option>1</option>
-                    <option>2</option>
-                    <option>3</option>
-                </select>
             </div>
         </div>
-    </div>
-            </section>
-        </div>
-    </div>    
+    </div>   
 </section>

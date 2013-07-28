@@ -16,5 +16,9 @@ namespace P.V.WantHelp_.Models
         {
             return server.mensajes.Take(10).Where(a=>a.idSe==msn).OrderByDescending(a => a.id).ToList();
         }
+        public List<Respuestas_Chat> getMensajesR(int p)
+        {
+            return server.Respuestas_Chat.Take(4).Where(a => a.idSe == p).OrderByDescending(a => a.id).ToList();
+        }
     }
 }

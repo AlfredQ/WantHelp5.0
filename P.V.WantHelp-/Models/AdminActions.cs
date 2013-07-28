@@ -203,5 +203,27 @@ namespace P.V.WantHelp_.Models
         {
             return server.Material.ToList();
         }
+        /*
+         public bool EnviarMensaje(mensajes msn)
+        {
+            server.mensajes.Add(msn);
+            try
+            {
+                server.SaveChanges();
+                return true;
+            }
+            catch { return false; }
+        }
+         */
+        public bool EnviarMensajeR(Respuestas_Chat msjrc)
+        {
+            server.Respuestas_Chat.Add(msjrc);
+            try
+            {
+                server.SaveChanges();
+                return true;
+            }
+            catch {return false;}
+        }
     }
 }
