@@ -28,15 +28,14 @@ namespace P.V.WantHelp_.Models
             this.Respuestas = new HashSet<Respuestas>();
             this.Respuestas_Chat = new HashSet<Respuestas_Chat>();
         }
-        [Required]
+        
         public int Id_Usu { get; set; }
        [Required]
         public string Nombre { get; set; }
         public string Apellido_P { get; set; }       
         public string Apellido_M { get; set; }
         [Required]
-        public string email { get; set; }
-        [Required]
+        public string email { get; set; }       
         public string sexo { get; set; }
         public Nullable<int> UserId { get; set; }
         public string Estado { get; set; }

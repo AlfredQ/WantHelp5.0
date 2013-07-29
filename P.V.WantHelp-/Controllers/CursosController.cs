@@ -59,6 +59,9 @@ namespace P.V.WantHelp_.Controllers
         //
         // GET: /Cursos/Create
 
+        //
+        // GET: /Cursos/Create
+
         public ActionResult Create()
         {
             if (Request.IsAuthenticated)
@@ -80,16 +83,7 @@ namespace P.V.WantHelp_.Controllers
         [HttpPost]
         public ActionResult Create(Cursos cursos, HttpPostedFileBase imagenportada)
         {
-            if (Request.IsAuthenticated)
-            {
-                /*  foto Avatar  */
-                int aux = Convert.ToInt32(Session["idUsuario"]);
-                string Cadenausuario = db.Usuario.Where(a => a.Id_Usu == aux).FirstOrDefault().Avatar;
-                ViewBag.fotoA = Cadenausuario;
-                /*******************/
-                Permisos check = new Permisos(Convert.ToInt32(Session["idus"]));
-                ViewBag.Menus = check.getPermisos();
-            };
+
             if (ModelState.IsValid)
             {
                 db.Entry(cursos).State = EntityState.Modified;
@@ -300,9 +294,9 @@ namespace P.V.WantHelp_.Controllers
             {
                 return Json(new { data = false });
             }
-            msjrc.idSe=msjrc.idSe;
-            msjrc.idUs=Convert.ToInt32(Session["idUsuario"]);
-            msjrc.fecha= DateTime.Now;
+            msjrc.idSe = msjrc.idSe;
+            msjrc.idUs = Convert.ToInt32(Session["idUsuario"]);
+            msjrc.fecha = DateTime.Now;
             msjrc.idChat = 1;
             AdminActions contexto = new AdminActions();
             if (contexto.EnviarMensajeR(msjrc))
@@ -313,16 +307,17 @@ namespace P.V.WantHelp_.Controllers
         }
         [HttpPost]
         public JsonResult getMensajesR(Respuestas_Chat msjrc)
-        { 
+        {
             MensajeActions contexto = new MensajeActions();
             List<Respuestas_Chat> listaMensajeR = contexto.getMensajesR(msjrc.idSe);
             List<MensajesViewR> listraMostrarR = new List<MensajesViewR>();
             foreach (var item in listaMensajeR)
             {
-                MensajesViewR insr= new MensajesViewR(){
+                MensajesViewR insr = new MensajesViewR()
+                {
 
-                    nickR=item.Usuario.Nombre,
-                    mensajeR= item.mensaje,
+                    nickR = item.Usuario.Nombre,
+                    mensajeR = item.mensaje,
                     fechaR = item.fecha.ToString()
                 };
                 listraMostrarR.Add(insr);

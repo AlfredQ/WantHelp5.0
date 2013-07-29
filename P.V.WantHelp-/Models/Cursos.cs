@@ -32,7 +32,6 @@ namespace P.V.WantHelp_.Models
         public System.DateTime Fecha_F { get; set; }
         public string urlBase { get; set; }
         public string urlHost { get; set; }
-        [Required]
         public string FotoPortada { get; set; }
     
         public virtual ICollection<inscripcion> inscripcion { get; set; }

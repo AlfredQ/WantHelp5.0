@@ -176,6 +176,7 @@
     <Compile Include="Controllers\RegistrosController.cs" />
     <Compile Include="Controllers\RolesController.cs" />
     <Compile Include="Controllers\RolesUserController.cs" />
+    <Compile Include="Controllers\SessionesController.cs" />
     <Compile Include="Controllers\UploadController.cs" />
     <Compile Include="Controllers\VistasProyectoController.cs" />
     <Compile Include="Models\archivos.cs">
@@ -606,6 +607,11 @@
     <Content Include="Views\Estudiante\IngresaAlMaterial.cshtml" />
     <Content Include="Views\RolesUser\VistaDetalleRA.cshtml" />
     <Content Include="Views\Estudiante\MostrarCursosArchivos.cshtml" />
+    <Content Include="Views\Sessiones\Index.cshtml" />
+    <Content Include="Views\Sessiones\Details.cshtml" />
+    <Content Include="Views\Sessiones\Create.cshtml" />
+    <Content Include="Views\Sessiones\Edit.cshtml" />
+    <Content Include="Views\Sessiones\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

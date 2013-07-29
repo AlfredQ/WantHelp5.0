@@ -138,7 +138,7 @@ namespace P.V.WantHelp_.Models
         internal bool ActualizarEstado(string p, int id)
         {
             //Usuario user = getUsuario(id);
-            Usuario user = getUsuarios(2);
+            Usuario user = getUsuarios(id);
             user.Estado = p;
             try
             {

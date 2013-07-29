@@ -1,0 +1,59 @@
+﻿@model IEnumerable<P.V.WantHelp_.Models.sesiones>
+
+@{
+    ViewBag.Title = "Index";
+}
+<style type="text/css">
+    footer { 
+    clear:both;
+    background-color: #414E5E;   
+    font-size: .8em;
+    height: 61px;
+    border-radius: 5px 5px 5px 5px;
+    margin:2px 2px 2px 2px;
+    filter: progid:DXImageTransform.Microsoft.gradient(gradientType=0, startColorstr='#FF696969', endColorstr='#FF252525');
+}
+</style>
+<section class="content-wrapper main-content clear-fix">
+<div id="body_Curso">
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="ink-table hover">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.titulo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.descriocion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Cursos.Titulo)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.titulo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.descriocion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Cursos.Titulo)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.id })
+        </td>
+    </tr>
+}
+
+</table>
+</div>
+</section>
